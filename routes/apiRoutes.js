@@ -6,7 +6,7 @@ module.exports = (app) => {
     // GET request: should read the db.json file and return ALL saved notes as JSON
     app.get('/api/notes', (req, res) => {
         let savedNotes = fs.readFileSync(db) 
-        return res.json(JSON.parse(savedNotes));
+        res.json(JSON.parse(savedNotes));
     });
 
     // POST request: receives a new note to save onto the body of the request--> adds it to db.json file and returns the new note to the client 
@@ -21,7 +21,7 @@ module.exports = (app) => {
         }
 
         fs.writeFileSync(db, JSON.stringify(savedNotes));
-        return res.send(db, savedNotes);
+        res.send(db, savedNotes);
     });
 
     // DELETE request: 
@@ -32,7 +32,7 @@ module.exports = (app) => {
         let indexToDelete = notes.filter((each) => each.id != id);
 
         if(!indexToDelete) {
-            return res.status(404).json({error: 'No note with that id'});
+            res.status(404).json({error: 'No note with that id'});
         }
 
         fs.writeFileSync(db, JSON.stringify(indexToDelete))
