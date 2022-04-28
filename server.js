@@ -13,3 +13,20 @@
 // GET/notes for notes.html
 // GET* for index.html 
 // API routes: GET/api and POST/api
+
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
+require('./routes/routes')(app);
+
+app.listen(PORT, () => {
+    console.log(`App listening on ${PORT}`);
+});
