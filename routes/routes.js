@@ -18,6 +18,14 @@ module.exports = app => {
             return console.log("Add new note: "+newNote.title);
         });
 
-        
+        app.get("/api/notes/:id", function(req, res) {
+            res.json(notes[req.params.id]);
+        });
+
+        app.delete("/api/notes:id", function(req, res) {
+            notes.splice(req.params.id, 1);
+            updateDb();
+            console.log("Delted note with id "+req.params.id);
+        });
     })
 }
