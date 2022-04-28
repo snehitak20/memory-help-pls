@@ -3,7 +3,7 @@ const fs = require ('fs');
 
 module.exports = (app) => {
     app.get('/api/notes', (req, res) => {
-        let savedNotes=fs.readFileSync(db) 
+        let savedNotes = fs.readFileSync(db) 
         return res.json(JSON.parse(savedNotes));
     });
 
@@ -21,11 +21,11 @@ module.exports = (app) => {
     });
 
 
-    app.delete('/api/notes/:id', (req, res)=>{
-        const {id}= req.params;
-        let notes=fs.readFileSync(db) 
-        notes=JSON.parse(notes);
-        let indexToDelete= notes.filter((each) => each.id != id);
+    app.delete('/api/notes/:id', (req, res) => {
+        const {id} = req.params;
+        let notes = fs.readFileSync(db) 
+        notes = JSON.parse(notes);
+        let indexToDelete = notes.filter((each) => each.id != id);
 
         if(!indexToDelete) {
             return res.status(404).json({error: 'No note with that id'});
