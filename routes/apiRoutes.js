@@ -8,8 +8,8 @@ module.exports = (app) => {
     });
 
     app.post('/api/notes', (req, res) => {
-        let savedNotes=fs.readFileSync(db) 
-        savedNotes=JSON.parse(savedNotes);
+        let savedNotes = fs.readFileSync(db) 
+        savedNotes = JSON.parse(savedNotes);
         savedNotes.push(req.body);
             
         for (let i = 0; i < savedNotes.length; i++) {
